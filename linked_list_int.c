@@ -87,15 +87,21 @@ unsigned int linked_list_insert_at(linked_list_int * list, int index, int value)
     return 0;
   node* new_node = create_node();
   new_node->value = value;
-  node* inserted = list->first;
-  for (int i = 0; i < index; i++) {
-    inserted = inserted->next;
+  node* current = list->first;
+  if (current->previous == 0) {
+    list->first = new_node;
+    list->last = new_node;
+    new_node->value = value;
+  } else {
+    for (int i = 0; i < index; i++) {
+      current = current->next;
+    }
+    new_node->next = current;
+    new_node->previous = current->previous;
+    node* prev = current->previous;
+    prev->next = new_node;
+    current->previous = new_node;
   }
-  new_node->next = inserted;
-  new_node->previous = inserted->previous;
-  node* prev = inserted->previous;
-  prev->next = new_node;
-  inserted->previous = new_node;
   list->size++;
   return list->size;
 }

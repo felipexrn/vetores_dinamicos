@@ -6,24 +6,30 @@
 
 int main() {
 
-  //array_list_insertion_test(); // Método para leitura de arquivos de entrada
+  //array_list_insertion_test(); // Método para leitura de arquivo de entrada
   
   int n = 10000000;
+  srand(time(0));
 
   printf("N: %d\n", n);
+  
   array_list_int* l01 = array_list_create_8();
   array_list_int* l02 = array_list_create_10();
   array_list_int* l03 = array_list_create_10k();
   linked_list_int* l04 = linked_list_create();
 
-  printf("\n\nl01: array começa com 8 e dobra memória.\n");
-  array_list_test(l01, n);
-  printf("\n\nl02: array começa com 10 e aumenta memória de 10 em 10.\n");
-  array_list_test(l02, n);
-  printf("\n\nl03: array começa com 10k e aumenta memória de 10k em 10k.\n");
-  array_list_test(l03, n);
-  printf("\n\nl04: lista duplamente ligada.\n");
-  linked_list_test(l04, n);
+  list_create_test(l01, l02, l03, l04, n);
+  list_get_test(l01, l02, l03, l04, 0);
+  list_get_test(l01, l02, l03, l04, n-1);
+  list_insert_at_test(l01, l02, l03, l04, n, 0);
+  list_insert_at_test(l01, l02, l03, l04, n, n-1);
+  list_remove_from_test(l01, l02, l03, l04, n, 1);
+  list_remove_from_test(l01, l02, l03, l04, n, n-1);
+  list_find_test(l01, l02, l03, l04, 0); // num = rand()%n;
+  list_find_test(l01, l02, l03, l04, n-1);
+  list_pop_back_test(l01, l02, l03, l04);
+  list_print_status(l01, l02, l03, l04);
+  list_destroy_test(l01, l02, l03, l04);
   
   return 0;
 }
@@ -51,121 +57,282 @@ void tempo(clock_t i, clock_t f) {
   printf("Tempo: %.3lf ms\n\n", (f-i)/(CLOCKS_PER_SEC/1000.0));
 } 
 
-void array_list_test(array_list_int* list, int n) {
+void list_create_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int n) {
   
   clock_t inicio, fim;
   
-  printf("array_list_create:\n");
+  printf("\nlist_create:\n");
+  
+  printf("l01: array começa com 8 e dobra memória.\n");
   inicio = clock();
-  array_list_populate(list, n);
+  array_list_populate(l1, n);
   fim = clock();
   tempo(inicio, fim);
+  
+  printf("l02: array começa com 10 e aumenta memória de 10 em 10.\n");
+  inicio = clock();
+  array_list_populate(l2, n);
+  fim = clock();
+  tempo(inicio, fim);
+
+  printf("l03: array começa com 10k e aumenta memória de 10k em 10k.\n");
+  inicio = clock();
+  array_list_populate(l3, n);
+  fim = clock();
+  tempo(inicio, fim);
+
+  printf("l04: lista duplamente ligada.\n");
+  inicio = clock();
+  linked_list_populate(l4, n);
+  fim = clock();
+  tempo(inicio, fim);
+
+}
+
+void list_get_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int index) {
+
+  clock_t inicio, fim;
   
   int error, num;
 
-  printf("array_list_get:\n");
+  printf("\nlist_get:\n");
+
+  printf("l01: array começa com 8 e dobra memória.\n");
   inicio = clock();
-  num = array_list_get(list, n-1, &error);
+  num = array_list_get(l1, index, &error);
   fim = clock();
+  printf("numero retornado: %d\n", num);
   tempo(inicio, fim);
-  //printf("numero pesquisado: %d\n", num);  
+
+  printf("l02: array começa com 10 e aumenta memória de 10 em 10.\n");
+  inicio = clock();
+  num = array_list_get(l2, index, &error);
+  fim = clock();
+  printf("numero retornado: %d\n", num);
+  tempo(inicio, fim);
+
+  printf("l03: array começa com 10k e aumenta memória de 10k em 10k.\n");
+  inicio = clock();
+  num = array_list_get(l3, index, &error);
+  fim = clock();
+  printf("numero retornado: %d\n", num);
+  tempo(inicio, fim);
+
+  printf("l04: lista duplamente ligada.\n");
+  inicio = clock();
+  num = linked_list_get(l4, index, &error);
+  fim = clock();
+  printf("numero retornado: %d\n", num);
+  tempo(inicio, fim);
+}
+
+void list_insert_at_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int n, int index) {
+
+  clock_t inicio, fim;
+
+  int num, length;
+  num = n-1; //rand()%n;
   
-  printf("array_list_insert_at:\n");
-  num = 3;
-  inicio = clock();
-  array_list_insert_at(list, num, 42);
-  fim = clock();
-  tempo(inicio, fim);
-  //printf("numero inserido em: %d\n", num); 
+  printf("\nlist_insert_at:\n");
 
-  printf("array_list_remove_from:\n");
-  num = 3;
+  printf("l01: array começa com 8 e dobra memória.\n");
   inicio = clock();
-  array_list_remove_from(list, 3);
+  length = array_list_insert_at(l1, index, rand()%n);
   fim = clock();
+  printf("numero %d inserido no indice %d\n", num, index); 
   tempo(inicio, fim);
-  //printf("numero removido em: %d\n", num); 
+
+  printf("l02: array começa com 10 e aumenta memória de 10 em 10.\n");
+  inicio = clock();
+  length = array_list_insert_at(l2, index, rand()%n);
+  fim = clock();
+  printf("numero %d inserido no indice %d\n", num, index); 
+  tempo(inicio, fim);
+
+  printf("l03: array começa com 10k e aumenta memória de 10k em 10k.\n");
+  inicio = clock();
+  length = array_list_insert_at(l3, index, rand()%n);
+  fim = clock();
+  printf("numero %d inserido no indice %d\n", num, index); 
+  tempo(inicio, fim);
+
+  printf("l04: lista duplamente ligada.\n");
+  inicio = clock();
+  length = linked_list_insert_at(l4, index, num);
+  fim = clock();
+  printf("numero %d inserido no indice %d\n", num, index);
+  tempo(inicio, fim);
+}
+
+void list_remove_from_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int n, int index) {
+
+  clock_t inicio, fim;
+
+  int num, length;
+  num = n-1; //rand()%n;
+
+  printf("\nlist_remove_from:\n");
+
+  printf("l01: array começa com 8 e dobra memória.\n");
+  inicio = clock();
+  length = array_list_remove_from(l1, index);
+  fim = clock();
+  printf("numero removido do indice %d\n", index); 
+  tempo(inicio, fim);
+
+  printf("l02: array começa com 10 e aumenta memória de 10 em 10.\n");
+  inicio = clock();
+  length = array_list_remove_from(l2, index);
+  fim = clock();
+  printf("numero removido do indice %d\n", index); 
+  tempo(inicio, fim);
+
+  printf("l03: array começa com 10k e aumenta memória de 10k em 10k.\n");
+  inicio = clock();
+  length = array_list_remove_from(l3, index);
+  fim = clock();
+  printf("numero removido do indice %d\n", index); 
+  tempo(inicio, fim);
+
+  printf("l04: lista duplamente ligada.\n");
+  inicio = clock();
+  length = linked_list_remove_from(l4, index);
+  fim = clock();
+  printf("numero removido em: %d\n", index);
+  tempo(inicio, fim);
+
+}
+
+void list_pop_back_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
+
+  clock_t inicio, fim;
+
+  int length;
   
-  printf("array_list_pop_back:\n");
+  printf("\nlist_pop_back:\n");
+
+  printf("l01: array começa com 8 e dobra memória.\n");
   inicio = clock();
-  num = array_list_pop_back(list);
+  length = array_list_pop_back(l1);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("array_list_find:\n");
+  printf("l02: array começa com 10 e aumenta memória de 10 em 10.\n");
   inicio = clock();
-  num = array_list_find(list, n-1);
+  length = array_list_pop_back(l2);
   fim = clock();
   tempo(inicio, fim);
-  //printf("indice do numero procurado: %d\n", num);
 
-  //array_list_print(list);
-  array_list_print_status(list);
-
-  printf("array_list_destroy:\n");
+  printf("l03: array começa com 10k e aumenta memória de 10k em 10k.\n");
   inicio = clock();
-  array_list_destroy(list);
+  length = array_list_pop_back(l3);
+  fim = clock();
+  tempo(inicio, fim);
+
+  printf("l04: lista duplamente ligada.\n");
+  inicio = clock();
+  length = linked_list_pop_back(l4);
   fim = clock();
   tempo(inicio, fim);
 }
 
-void linked_list_test(linked_list_int* list, int n) {
+void list_find_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num) {
 
   clock_t inicio, fim;
 
-  printf("linked_list_create:\n");
+  int index, length;
+
+  printf("\nlist_find:\n");
+
+  printf("l01: array começa com 8 e dobra memória.\n");
   inicio = clock();
-  linked_list_populate(list, n);
+  index = array_list_find(l1, num);
   fim = clock();
-  tempo(inicio, fim);;
+  printf("numero %d encontrado no indice %d\n", num, index);
+  tempo(inicio, fim);
+
+  printf("l02: array começa com 10 e aumenta memória de 10 em 10.\n");
+  inicio = clock();
+  index = array_list_find(l2, num);
+  fim = clock();
+  printf("numero %d encontrado no indice %d\n", num, index);
+  tempo(inicio, fim);
+
+  printf("l03: array começa com 10k e aumenta memória de 10k em 10k.\n");
+  inicio = clock();
+  index = array_list_find(l3, num);
+  fim = clock();
+  printf("numero %d encontrado no indice %d\n", num, index);
+  tempo(inicio, fim);
+
+  printf("l04: lista duplamente ligada.\n");
+  inicio = clock();
+  index = linked_list_find(l4, num);
+  fim = clock();
+  printf("numero %d encontrado no indice %d\n", num, index);
+  tempo(inicio, fim);
+}
+
+void list_print_status(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
+
+  clock_t inicio, fim;
+
+  printf("\nlist_print_status:\n");
   
-  int error, num;
-
-  printf("linked_list_get:\n");
+  printf("l01: array começa com 8 e dobra memória.\n");
   inicio = clock();
-  num = linked_list_get(list, n-1, &error);
-  fim = clock();
-  tempo(inicio, fim);;
-  //printf("numero pesquisado: %d\n", num); 
-
-  printf("linked_list_insert_at:\n");
-  num = 3;
-  inicio = clock();
-  linked_list_insert_at(list, num, 42);
-  fim = clock();
-  tempo(inicio, fim);
-  //printf("numero inserido em: %d\n", num); 
-
-  printf("linked_list_remove_from:\n");
-  num = 3;
-  inicio = clock();
-  linked_list_remove_from(list, 3);
-  fim = clock();
-  tempo(inicio, fim);
-  //printf("numero removido em: %d\n", num); 
-
-  printf("linked_list_pop_back:\n");
-  inicio = clock();
-  num = linked_list_pop_back(list);
+  array_list_print_status(l1);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("linked_list_find:\n");
+  printf("l02: array começa com 10 e aumenta memória de 10 em 10.\n");
   inicio = clock();
-  num = linked_list_find(list, n-1);
-  fim = clock();
-  tempo(inicio, fim);
-  //printf("indice do numero procurado: %d\n", num);
-
-  //linked_list_print(list);
-  linked_list_print_status(list);
-
-  printf("linked_list_destroy:\n");
-  inicio = clock();
-  linked_list_destroy(list);
+  array_list_print_status(l2);
   fim = clock();
   tempo(inicio, fim);
   
+  printf("l03: array começa com 10k e aumenta memória de 10k em 10k.\n");
+  inicio = clock();
+  array_list_print_status(l3);
+  fim = clock();
+  tempo(inicio, fim);
+
+  printf("l04: lista duplamente ligada.\n");
+  inicio = clock();
+  linked_list_print_status(l4);
+  fim = clock();
+  tempo(inicio, fim);
+}
+
+void list_destroy_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
+
+  clock_t inicio, fim;
+  
+  printf("\narray_list_destroy:\n");
+
+  printf("l01: array começa com 8 e dobra memória.\n");
+  inicio = clock();
+  array_list_destroy(l1);
+  fim = clock();
+  tempo(inicio, fim);
+
+  printf("l02: array começa com 10 e aumenta memória de 10 em 10.\n");
+  inicio = clock();
+  array_list_destroy(l2);
+  fim = clock();
+  tempo(inicio, fim);
+
+  printf("l03: array começa com 10k e aumenta memória de 10k em 10k.\n");
+  inicio = clock();
+  array_list_destroy(l3);
+  fim = clock();
+  tempo(inicio, fim);
+
+  printf("l04: lista duplamente ligada.\n");
+  inicio = clock();
+  linked_list_destroy(l4);
+  fim = clock();
+  tempo(inicio, fim);  
 }
 
 /* Mostra valor não inserido e sai do programa.*/
