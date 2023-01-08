@@ -88,14 +88,17 @@ unsigned int linked_list_insert_at(linked_list_int * list, int index, int value)
   node* new_node = create_node();
   new_node->value = value;
   node* current = list->first;
+  for (int i = 0; i < index; i++) {
+    current = current->next;
+  }
+  if(current == 0) {
+    current = list->last;
+  }
   if (current->previous == 0) {
     list->first = new_node;
     list->last = new_node;
     new_node->value = value;
   } else {
-    for (int i = 0; i < index; i++) {
-      current = current->next;
-    }
     new_node->next = current;
     new_node->previous = current->previous;
     node* prev = current->previous;
@@ -111,14 +114,18 @@ int linked_list_remove_from(linked_list_int * list, int index) { // Remove eleme
     return 0;
   if(index < 0 || index >= list->size)
     return 0;
-  node* removed = list->first;
+  node* current = list->first;
   for (int i = 0; i < index; i++) {
-    removed = removed->next;
+    current = current->next;
   }
-  node* nxt = removed->next;
-  node* prev = removed->previous;
-  prev->next = nxt;
-  nxt->previous = prev;
+  if (current->previous == 0) {
+    list->first = current->next;
+  } else {
+    node* next = current->next;
+    node* prev = current->previous;
+    prev->next = next;
+    next->previous = prev;
+  }
   list->size--;
   return list->size;
 }

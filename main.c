@@ -23,7 +23,7 @@ int main() {
   list_get_test(l01, l02, l03, l04, n-1);
   list_insert_at_test(l01, l02, l03, l04, n, 0);
   list_insert_at_test(l01, l02, l03, l04, n, n-1);
-  list_remove_from_test(l01, l02, l03, l04, n, 1);
+  list_remove_from_test(l01, l02, l03, l04, n, 0);
   list_remove_from_test(l01, l02, l03, l04, n, n-1);
   list_find_test(l01, l02, l03, l04, 0); // num = rand()%n;
   list_find_test(l01, l02, l03, l04, n-1);
