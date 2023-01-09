@@ -91,9 +91,6 @@ unsigned int linked_list_insert_at(linked_list_int * list, int index, int value)
   for (int i = 0; i < index; i++) {
     current = current->next;
   }
-  if(current == 0) {
-    current = list->last;
-  }
   if (current->previous == 0) {
     list->first = new_node;
     list->last = new_node;

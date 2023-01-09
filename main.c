@@ -126,32 +126,32 @@ void list_get_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, l
   tempo(inicio, fim);
 }
 
-void list_insert_at_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int n, int index) {
+void list_insert_at_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num, int index) {
 
   clock_t inicio, fim;
 
-  int num, length;
-  num = n-1; //rand()%n;
+  int length;
+  //num = rand()%n;
   
   printf("\nlist_insert_at:\n");
 
   printf("l01: array começa com 8 e dobra memória.\n");
   inicio = clock();
-  length = array_list_insert_at(l1, index, rand()%n);
+  length = array_list_insert_at(l1, index, num);
   fim = clock();
   printf("numero %d inserido no indice %d\n", num, index); 
   tempo(inicio, fim);
 
   printf("l02: array começa com 10 e aumenta memória de 10 em 10.\n");
   inicio = clock();
-  length = array_list_insert_at(l2, index, rand()%n);
+  length = array_list_insert_at(l2, index, num);
   fim = clock();
   printf("numero %d inserido no indice %d\n", num, index); 
   tempo(inicio, fim);
 
   printf("l03: array começa com 10k e aumenta memória de 10k em 10k.\n");
   inicio = clock();
-  length = array_list_insert_at(l3, index, rand()%n);
+  length = array_list_insert_at(l3, index, num);
   fim = clock();
   printf("numero %d inserido no indice %d\n", num, index); 
   tempo(inicio, fim);
@@ -164,12 +164,12 @@ void list_insert_at_test(array_list_int* l1, array_list_int* l2, array_list_int*
   tempo(inicio, fim);
 }
 
-void list_remove_from_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int n, int index) {
+void list_remove_from_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num, int index) {
 
   clock_t inicio, fim;
 
-  int num, length;
-  num = n-1; //rand()%n;
+  int length;
+  //num = rand()%n;
 
   printf("\nlist_remove_from:\n");
 
