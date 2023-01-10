@@ -91,10 +91,15 @@ unsigned int linked_list_insert_at(linked_list_int * list, int index, int value)
   for (int i = 0; i < index; i++) {
     current = current->next;
   }
-  if (current->previous == 0) {
+  if (list->size == 0) {
     list->first = new_node;
     list->last = new_node;
     new_node->value = value;
+  } else if (list->first == current) {
+    new_node->next = current;
+    new_node->previous = current->previous;
+    current->previous = new_node;
+    list->first = new_node;
   } else {
     new_node->next = current;
     new_node->previous = current->previous;

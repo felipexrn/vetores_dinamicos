@@ -8,7 +8,7 @@ int main() {
 
   //array_list_insertion_test(); // Método para leitura de arquivo de entrada
   
-  int n = 10000000;
+  int n = 10;
   srand(time(0));
 
   printf("N: %d\n", n);
@@ -19,17 +19,29 @@ int main() {
   linked_list_int* l04 = linked_list_create();
 
   list_create_test(l01, l02, l03, l04, n);
+  linked_list_print(l04);
   list_get_test(l01, l02, l03, l04, 0);
+  linked_list_print(l04);
   list_get_test(l01, l02, l03, l04, n-1);
+  linked_list_print(l04);
   list_insert_at_test(l01, l02, l03, l04, n, 0);
+  linked_list_print(l04);
   list_insert_at_test(l01, l02, l03, l04, n, n-1);
+  linked_list_print(l04);
   list_remove_from_test(l01, l02, l03, l04, n, 0);
+  linked_list_print(l04);
   list_remove_from_test(l01, l02, l03, l04, n, n-1);
+  linked_list_print(l04);
   list_find_test(l01, l02, l03, l04, 0); // num = rand()%n;
+  linked_list_print(l04);
   list_find_test(l01, l02, l03, l04, n-1);
+  linked_list_print(l04);
   list_pop_back_test(l01, l02, l03, l04);
+  linked_list_print(l04);
   list_print_status(l01, l02, l03, l04);
+  linked_list_print(l04);
   list_destroy_test(l01, l02, l03, l04);
+  linked_list_print(l04);
   
   return 0;
 }
