@@ -57,8 +57,13 @@ unsigned int linked_list_pop_back(linked_list_int * list) { // Remove um element
   if (list->size == 0)
     return 0;
   node* old_node = list->last;
-  list->last = list->last->previous;
-  list->last->next = 0;
+  if (list->last->previous == 0) {
+    list->first = 0;
+    list->last = 0;
+  } else {  
+    list->last = list->last->previous;
+    list->last->next = 0;
+  }
   free(old_node);
   list->size--;
 }
