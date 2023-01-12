@@ -25,28 +25,40 @@ int main() {
     array_list_int* l03 = array_list_create_10k();
     linked_list_int* l04 = linked_list_create();
     
+    
     array_list_populate(l01, n);
     array_list_populate(l02, n);
     array_list_populate(l03, n);
     linked_list_populate(l04, n);
     
-    //list_create_test(l01, l02, l03, l04, n); // feito
+    
+    //list_push_back_test(l01, l02, l03, l04, n); // feito
     //list_get_test(l01, l02, l03, l04, 0);
     //list_get_test(l01, l02, l03, l04, n-1);
     //list_insert_at_test(l01, l02, l03, l04, n, 0);
     //list_insert_at_test(l01, l02, l03, l04, n, n-1);
-    list_remove_from_test(l01, l02, l03, l04, n, 0);
+    //list_remove_from_test(l01, l02, l03, l04, n, 0);
     //list_remove_from_test(l01, l02, l03, l04, n, n-1);
     //list_find_test(l01, l02, l03, l04, 0); // num = rand()%n;
     //list_find_test(l01, l02, l03, l04, n-1);
-    //list_pop_back_test(l01, l02, l03, l04);
-    //list_print_status(l01, l02, l03, l04);
-    //list_destroy_test(l01, l02, l03, l04); // feito
+    list_pop_back_test(l01, l02, l03, l04);
+    //list_status_test(l01, l02, l03, l04);
+    ///list_destroy_test(l01, l02, l03, l04); // feito
 
+    /*
+    array_list_print_status(l01);
+    array_list_print_status(l02);
+    array_list_print_status(l03);
+    linked_list_print_status(l04);
+    */
+
+    
     array_list_destroy(l01);
     array_list_destroy(l02);
     array_list_destroy(l03);
     linked_list_destroy(l04);
+    
+    
     n *= p;
   }
   
@@ -66,18 +78,18 @@ void linked_list_populate(linked_list_int* list, int n) {
 }
 
 void array_list_print_status(array_list_int* list) {
-  printf("array_list_status:\n  size: %d\n  capacity: %d\n  occupied: %.1f\n\n", array_list_size(list), array_list_capacity(list), array_list_percent_occupied(list));
+  printf("\narray_list_status:\n\tsize: %d\n\tcapacity: %d\n\toccupied: %.1f\n\n", array_list_size(list), array_list_capacity(list), array_list_percent_occupied(list));
 }
 
 void linked_list_print_status(linked_list_int* list) {
-  printf("linked_list_status:\n  size: %d\n  occupied: %.1f\n\n", linked_list_size(list), linked_list_percent_occupied(list));
+  printf("\nlinked_list_status:\n  size: %d\n  occupied: %.1f\n\n", linked_list_size(list), linked_list_percent_occupied(list));
 }
 void tempo(clock_t i, clock_t f) {
   //printf("Tempo: %.3lf ms\n", (f-i)/(CLOCKS_PER_SEC/1000.0));
   printf("%.3lf\t", (f-i)/(CLOCKS_PER_SEC/1000.0));
 } 
 
-void list_create_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int n) {
+void list_push_back_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int n) {
   
   clock_t inicio, fim;
   
@@ -305,33 +317,42 @@ void list_find_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, 
   printf("\n");
 }
 
-void list_print_status(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
+void list_status_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
 
   clock_t inicio, fim;
+
+  int size, capacity, occupied;
 
   //printf("list_print_status:\n");
   
   //printf("l01: ");
   inicio = clock();
-  array_list_print_status(l1);
+  size = array_list_size(l1);
+  capacity = array_list_capacity(l1);
+  occupied = array_list_percent_occupied(l1);
   fim = clock();
   tempo(inicio, fim);
 
   //printf("l02: ");
   inicio = clock();
-  array_list_print_status(l2);
+  size = array_list_size(l2);
+  capacity = array_list_capacity(l2);
+  occupied = array_list_percent_occupied(l2);
   fim = clock();
   tempo(inicio, fim);
   
   //printf("l03: ");
   inicio = clock();
-  array_list_print_status(l3);
+  size = array_list_size(l3);
+  capacity = array_list_capacity(l3);
+  occupied = array_list_percent_occupied(l3);
   fim = clock();
   tempo(inicio, fim);
 
   //printf("l04: ");
   inicio = clock();
-  linked_list_print_status(l4);
+  size = linked_list_size(l4);
+  occupied = linked_list_percent_occupied(l4);
   fim = clock();
   tempo(inicio, fim);
 

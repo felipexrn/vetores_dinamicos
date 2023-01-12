@@ -122,17 +122,23 @@ int linked_list_remove_from(linked_list_int * list, int index) { // Remove eleme
   if(index < 0 || index >= list->size)
     return 0;
   node* current = list->first;
-  for (int i = 0; i < index; i++) {
+  for (int i = 0; i <= index; i++) {
     current = current->next;
+    if (current == 0) {
+      current = list->last;
+    }
   }
   if (current->previous == 0) {
     list->first = current->next;
+  } else if (current->next == 0) {
+    list->last = current->previous;
   } else {
     node* next = current->next;
     node* prev = current->previous;
     prev->next = next;
     next->previous = prev;
   }
+  free(current);
   list->size--;
   return list->size;
 }
