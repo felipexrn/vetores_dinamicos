@@ -8,61 +8,48 @@ int main() {
 
   //array_list_insertion_test(); // Método para leitura de arquivo de entrada
   
-  int n = 1, p = 2;
+  int m = 17000000, n = 1, p = 2;
   srand(time(0));
 
   printf("l01: array começa com 8 e dobra memória.\n");
   printf("l02: array começa com 10 e aumenta memória de 10 em 10.\n");
   printf("l03: array começa com 10k e aumenta memória de 10k em 10k.\n");
   printf("l04: lista duplamente ligada.\n\n");
-  
-  while (n < 17000000) {
-    printf("\nN: %d\n", n);
 
+  printf("N: de %d a %d\n\n", n, m);
+  
+  while (n < m) {
+    
     array_list_int* l01 = array_list_create_8();
     array_list_int* l02 = array_list_create_10();
     array_list_int* l03 = array_list_create_10k();
     linked_list_int* l04 = linked_list_create();
     
-    list_create_test(l01, l02, l03, l04, n);
+    array_list_populate(l01, n);
+    array_list_populate(l02, n);
+    array_list_populate(l03, n);
+    linked_list_populate(l04, n);
+    
+    //list_create_test(l01, l02, l03, l04, n); // feito
     //list_get_test(l01, l02, l03, l04, 0);
     //list_get_test(l01, l02, l03, l04, n-1);
     //list_insert_at_test(l01, l02, l03, l04, n, 0);
     //list_insert_at_test(l01, l02, l03, l04, n, n-1);
-    //list_remove_from_test(l01, l02, l03, l04, n, 0);
+    list_remove_from_test(l01, l02, l03, l04, n, 0);
     //list_remove_from_test(l01, l02, l03, l04, n, n-1);
     //list_find_test(l01, l02, l03, l04, 0); // num = rand()%n;
     //list_find_test(l01, l02, l03, l04, n-1);
-    list_pop_back_test(l01, l02, l03, l04);
-    list_print_status(l01, l02, l03, l04);
-    list_destroy_test(l01, l02, l03, l04);
+    //list_pop_back_test(l01, l02, l03, l04);
+    //list_print_status(l01, l02, l03, l04);
+    //list_destroy_test(l01, l02, l03, l04); // feito
+
+    array_list_destroy(l01);
+    array_list_destroy(l02);
+    array_list_destroy(l03);
+    linked_list_destroy(l04);
     n *= p;
   }
   
-  n = 1;
-  
-  /*
-  
-  printf("N: %d\n", n);
-  
-  array_list_int* l01 = array_list_create_8();
-  array_list_int* l02 = array_list_create_10();
-  array_list_int* l03 = array_list_create_10k();
-  linked_list_int* l04 = linked_list_create();
-
-  list_create_test(l01, l02, l03, l04, n);
-  list_get_test(l01, l02, l03, l04, 0);
-  list_get_test(l01, l02, l03, l04, n-1);
-  list_insert_at_test(l01, l02, l03, l04, n, 0);
-  list_insert_at_test(l01, l02, l03, l04, n, n-1);
-  list_remove_from_test(l01, l02, l03, l04, n, 0);
-  list_remove_from_test(l01, l02, l03, l04, n, n-1);
-  list_find_test(l01, l02, l03, l04, 0); // num = rand()%n;
-  list_find_test(l01, l02, l03, l04, n-1);
-  list_pop_back_test(l01, l02, l03, l04);
-  list_print_status(l01, l02, l03, l04);
-  list_destroy_test(l01, l02, l03, l04);
-  */
   return 0;
 }
 
@@ -86,38 +73,41 @@ void linked_list_print_status(linked_list_int* list) {
   printf("linked_list_status:\n  size: %d\n  occupied: %.1f\n\n", linked_list_size(list), linked_list_percent_occupied(list));
 }
 void tempo(clock_t i, clock_t f) {
-  printf("Tempo: %.3lf ms\n", (f-i)/(CLOCKS_PER_SEC/1000.0));
+  //printf("Tempo: %.3lf ms\n", (f-i)/(CLOCKS_PER_SEC/1000.0));
+  printf("%.3lf\t", (f-i)/(CLOCKS_PER_SEC/1000.0));
 } 
 
 void list_create_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int n) {
   
   clock_t inicio, fim;
   
-  printf("list_create:\n");
+  //printf("list_create:\n");
   
-  printf("l01: ");
+  //printf("l01: ");
   inicio = clock();
   array_list_populate(l1, n);
   fim = clock();
   tempo(inicio, fim);
   
-  printf("l02: ");
+  //printf("l02: ");
   inicio = clock();
   array_list_populate(l2, n);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("l03: ");
+  //printf("l03: ");
   inicio = clock();
   array_list_populate(l3, n);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("l04: ");
+  //printf("l04: ");
   inicio = clock();
   linked_list_populate(l4, n);
   fim = clock();
   tempo(inicio, fim);
+
+  printf("\n");
 
 }
 
@@ -127,35 +117,37 @@ void list_get_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, l
   
   int error, num;
 
-  printf("list_get:\n");
+  //printf("list_get:\n");
 
-  printf("l01: ");
+  //printf("l01: ");
   inicio = clock();
   num = array_list_get(l1, index, &error);
   fim = clock();
-  printf("numero retornado: %d\n", num);
+  //printf("numero retornado: %d\n", num);
   tempo(inicio, fim);
 
-  printf("l02: ");
+  //printf("l02: ");
   inicio = clock();
   num = array_list_get(l2, index, &error);
   fim = clock();
-  printf("numero retornado: %d\n", num);
+  //printf("numero retornado: %d\n", num);
   tempo(inicio, fim);
 
-  printf("l03: ");
+  //printf("l03: ");
   inicio = clock();
   num = array_list_get(l3, index, &error);
   fim = clock();
-  printf("numero retornado: %d\n", num);
+  //printf("numero retornado: %d\n", num);
   tempo(inicio, fim);
 
-  printf("l04: ");
+  //printf("l04: ");
   inicio = clock();
   num = linked_list_get(l4, index, &error);
   fim = clock();
-  printf("numero retornado: %d\n", num);
+  //printf("numero retornado: %d\n", num);
   tempo(inicio, fim);
+
+  printf("\n");
 }
 
 void list_insert_at_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num, int index) {
@@ -165,35 +157,37 @@ void list_insert_at_test(array_list_int* l1, array_list_int* l2, array_list_int*
   int length;
   //num = rand()%n;
   
-  printf("list_insert_at:\n");
+  //printf("list_insert_at:\n");
 
-  printf("l01: ");
+  //printf("l01: ");
   inicio = clock();
   length = array_list_insert_at(l1, index, num);
   fim = clock();
-  printf("numero %d inserido no indice %d\n", num, index); 
+  //printf("numero %d inserido no indice %d\n", num, index); 
   tempo(inicio, fim);
 
-  printf("l02: ");
+  //printf("l02: ");
   inicio = clock();
   length = array_list_insert_at(l2, index, num);
   fim = clock();
-  printf("numero %d inserido no indice %d\n", num, index); 
+  //printf("numero %d inserido no indice %d\n", num, index); 
   tempo(inicio, fim);
 
-  printf("l03: ");
+  //printf("l03: ");
   inicio = clock();
   length = array_list_insert_at(l3, index, num);
   fim = clock();
-  printf("numero %d inserido no indice %d\n", num, index); 
+  //printf("numero %d inserido no indice %d\n", num, index); 
   tempo(inicio, fim);
 
-  printf("l04: ");
+  //printf("l04: ");
   inicio = clock();
   length = linked_list_insert_at(l4, index, num);
   fim = clock();
-  printf("numero %d inserido no indice %d\n", num, index);
+  //printf("numero %d inserido no indice %d\n", num, index);
   tempo(inicio, fim);
+
+  printf("\n");
 }
 
 void list_remove_from_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num, int index) {
@@ -203,35 +197,37 @@ void list_remove_from_test(array_list_int* l1, array_list_int* l2, array_list_in
   int length;
   //num = rand()%n;
 
-  printf("list_remove_from:\n");
+  //printf("list_remove_from:\n");
 
-  printf("l01: ");
+  //printf("l01: ");
   inicio = clock();
   length = array_list_remove_from(l1, index);
   fim = clock();
-  printf("numero removido do indice %d\n", index); 
+  //printf("numero removido do indice %d\n", index); 
   tempo(inicio, fim);
 
-  printf("l02: ");
+  //printf("l02: ");
   inicio = clock();
   length = array_list_remove_from(l2, index);
   fim = clock();
-  printf("numero removido do indice %d\n", index); 
+  //printf("numero removido do indice %d\n", index); 
   tempo(inicio, fim);
 
-  printf("l03: ");
+  //printf("l03: ");
   inicio = clock();
   length = array_list_remove_from(l3, index);
   fim = clock();
-  printf("numero removido do indice %d\n", index); 
+  //printf("numero removido do indice %d\n", index); 
   tempo(inicio, fim);
 
-  printf("l04: ");
+  //printf("l04: ");
   inicio = clock();
   length = linked_list_remove_from(l4, index);
   fim = clock();
-  printf("numero removido em: %d\n", index);
+  //printf("numero removido em: %d\n", index);
   tempo(inicio, fim);
+
+  printf("\n");
 
 }
 
@@ -241,31 +237,33 @@ void list_pop_back_test(array_list_int* l1, array_list_int* l2, array_list_int* 
 
   int length;
   
-  printf("list_pop_back:\n");
+  //printf("list_pop_back:\n");
 
-  printf("l01: ");
+  //printf("l01: ");
   inicio = clock();
   length = array_list_pop_back(l1);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("l02: ");
+  //printf("l02: ");
   inicio = clock();
   length = array_list_pop_back(l2);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("l03: ");
+  //printf("l03: ");
   inicio = clock();
   length = array_list_pop_back(l3);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("l04: ");
+  //printf("l04: ");
   inicio = clock();
   length = linked_list_pop_back(l4);
   fim = clock();
   tempo(inicio, fim);
+
+  printf("\n");
 }
 
 void list_find_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num) {
@@ -274,97 +272,103 @@ void list_find_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, 
 
   int index, length;
 
-  printf("list_find:\n");
+  //printf("list_find:\n");
 
-  printf("l01: ");
+  //printf("l01: ");
   inicio = clock();
   index = array_list_find(l1, num);
   fim = clock();
-  printf("numero %d encontrado no indice %d\n", num, index);
+  //printf("numero %d encontrado no indice %d\n", num, index);
   tempo(inicio, fim);
 
-  printf("l02:\ ");
+  //printf("l02:\ ");
   inicio = clock();
   index = array_list_find(l2, num);
   fim = clock();
-  printf("numero %d encontrado no indice %d\n", num, index);
+  //printf("numero %d encontrado no indice %d\n", num, index);
   tempo(inicio, fim);
 
-  printf("l03: ");
+  //printf("l03: ");
   inicio = clock();
   index = array_list_find(l3, num);
   fim = clock();
-  printf("numero %d encontrado no indice %d\n", num, index);
+  //printf("numero %d encontrado no indice %d\n", num, index);
   tempo(inicio, fim);
 
-  printf("l04: ");
+  //printf("l04: ");
   inicio = clock();
   index = linked_list_find(l4, num);
   fim = clock();
-  printf("numero %d encontrado no indice %d\n", num, index);
+  //printf("numero %d encontrado no indice %d\n", num, index);
   tempo(inicio, fim);
+
+  printf("\n");
 }
 
 void list_print_status(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
 
   clock_t inicio, fim;
 
-  printf("list_print_status:\n");
+  //printf("list_print_status:\n");
   
-  printf("l01: ");
+  //printf("l01: ");
   inicio = clock();
   array_list_print_status(l1);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("l02: ");
+  //printf("l02: ");
   inicio = clock();
   array_list_print_status(l2);
   fim = clock();
   tempo(inicio, fim);
   
-  printf("l03: ");
+  //printf("l03: ");
   inicio = clock();
   array_list_print_status(l3);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("l04: ");
+  //printf("l04: ");
   inicio = clock();
   linked_list_print_status(l4);
   fim = clock();
   tempo(inicio, fim);
+
+  printf("\n");
 }
 
 void list_destroy_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
 
   clock_t inicio, fim;
   
-  printf("array_list_destroy:\n");
+  //printf("array_list_destroy:\n");
 
-  printf("l01: ");
+  //printf("l01: ");
   inicio = clock();
   array_list_destroy(l1);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("l02: ");
+  //printf("l02: ");
   inicio = clock();
   array_list_destroy(l2);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("l03: ");
+  //printf("l03: ");
   inicio = clock();
   array_list_destroy(l3);
   fim = clock();
   tempo(inicio, fim);
 
-  printf("l04: ");
+  //printf("l04: ");
   inicio = clock();
   linked_list_destroy(l4);
   fim = clock();
   tempo(inicio, fim);  
+
+  printf("\n");
 }
 
 /* Mostra valor não inserido e sai do programa.*/
