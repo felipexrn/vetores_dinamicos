@@ -81,6 +81,7 @@ int linked_list_find(linked_list_int * list, int element) {// Busca um elemento 
   for (int i = 0; i < list->size; i++) {
     if(aux->value == element)
       return i;
+    aux = aux->next;
   }
   return -1;
 }

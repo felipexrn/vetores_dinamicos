@@ -32,26 +32,18 @@ int main() {
     linked_list_populate(l04, n);
     
     
-    //list_push_back_test(l01, l02, l03, l04, n); // feito
-    //list_get_test(l01, l02, l03, l04, 0);
-    //list_get_test(l01, l02, l03, l04, n-1);
-    //list_insert_at_test(l01, l02, l03, l04, n, 0);
-    //list_insert_at_test(l01, l02, l03, l04, n, n-1);
-    //list_remove_from_test(l01, l02, l03, l04, n, 0);
-    //list_remove_from_test(l01, l02, l03, l04, n, n-1);
-    //list_find_test(l01, l02, l03, l04, 0); // num = rand()%n;
-    //list_find_test(l01, l02, l03, l04, n-1);
-    list_pop_back_test(l01, l02, l03, l04);
-    //list_status_test(l01, l02, l03, l04);
-    ///list_destroy_test(l01, l02, l03, l04); // feito
-
-    /*
-    array_list_print_status(l01);
-    array_list_print_status(l02);
-    array_list_print_status(l03);
-    linked_list_print_status(l04);
-    */
-
+    //push_back_test(l01, l02, l03, l04, n); // feito
+    //get_test(l01, l02, l03, l04, 0); // feito
+    //get_test(l01, l02, l03, l04, n-1); // feito
+    //insert_at_test(l01, l02, l03, l04, n, 0); // feito
+    //insert_at_test(l01, l02, l03, l04, n, n-1); // feito
+    //remove_from_test(l01, l02, l03, l04, n, 0); // feito
+    //remove_from_test(l01, l02, l03, l04, n, n-1); // feito
+    //find_test(l01, l02, l03, l04, 0); // num = rand()%n; // feito
+    //find_test(l01, l02, l03, l04, n-1); // feito
+    //pop_back_test(l01, l02, l03, l04); // feito
+    //status_test(l01, l02, l03, l04); // feito
+    ///destroy_test(l01, l02, l03, l04); // feito
     
     array_list_destroy(l01);
     array_list_destroy(l02);
@@ -61,6 +53,15 @@ int main() {
     
     n *= p;
   }
+  
+  // lists_print_status(n, m);
+  
+  /*n = 1;
+  lists_push_back_test(n, m, p);
+  n = 1;
+  lists_get_start_test(n, m, p);
+  n = 1;
+  lists_get_end_test(n, m, p);*/
   
   return 0;
 }
@@ -89,7 +90,7 @@ void tempo(clock_t i, clock_t f) {
   printf("%.3lf\t", (f-i)/(CLOCKS_PER_SEC/1000.0));
 } 
 
-void list_push_back_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int n) {
+void push_back_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int n) {
   
   clock_t inicio, fim;
   
@@ -123,7 +124,7 @@ void list_push_back_test(array_list_int* l1, array_list_int* l2, array_list_int*
 
 }
 
-void list_get_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int index) {
+void get_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int index) {
 
   clock_t inicio, fim;
   
@@ -162,7 +163,7 @@ void list_get_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, l
   printf("\n");
 }
 
-void list_insert_at_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num, int index) {
+void insert_at_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num, int index) {
 
   clock_t inicio, fim;
 
@@ -202,7 +203,7 @@ void list_insert_at_test(array_list_int* l1, array_list_int* l2, array_list_int*
   printf("\n");
 }
 
-void list_remove_from_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num, int index) {
+void remove_from_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num, int index) {
 
   clock_t inicio, fim;
 
@@ -243,7 +244,7 @@ void list_remove_from_test(array_list_int* l1, array_list_int* l2, array_list_in
 
 }
 
-void list_pop_back_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
+void pop_back_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
 
   clock_t inicio, fim;
 
@@ -278,7 +279,7 @@ void list_pop_back_test(array_list_int* l1, array_list_int* l2, array_list_int* 
   printf("\n");
 }
 
-void list_find_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num) {
+void find_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4, int num) {
 
   clock_t inicio, fim;
 
@@ -317,7 +318,7 @@ void list_find_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, 
   printf("\n");
 }
 
-void list_status_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
+void status_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
 
   clock_t inicio, fim;
 
@@ -359,7 +360,7 @@ void list_status_test(array_list_int* l1, array_list_int* l2, array_list_int* l3
   printf("\n");
 }
 
-void list_destroy_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
+void destroy_test(array_list_int* l1, array_list_int* l2, array_list_int* l3, linked_list_int* l4) {
 
   clock_t inicio, fim;
   
@@ -436,4 +437,132 @@ int array_list_insertion_test() {
   printf("Tamanho do vetor: %d\n", array_list_size(l01));
   print_vector(l01);
   return 0;
+}
+void lists_print_status(int n, int m) {
+  
+  n = m;
+
+  array_list_int* l01 = array_list_create_8();
+  array_list_int* l02 = array_list_create_10();
+  array_list_int* l03 = array_list_create_10k();
+  linked_list_int* l04 = linked_list_create();
+  
+  array_list_populate(l01, n);
+  array_list_populate(l02, n);
+  array_list_populate(l03, n);
+  linked_list_populate(l04, n);
+
+  clock_t t1, t2, t3, t4, t5, t6, t7, t8;
+  
+  t1 = clock();
+  array_list_print_status(l01);
+  t2 = clock();
+  t3 = clock();
+  array_list_print_status(l02);
+  t4 = clock();
+  t5 = clock();
+  array_list_print_status(l03);
+  t6 = clock();
+  t7 = clock();
+  linked_list_print_status(l04);
+  t8 = clock();
+  tempo(t1, t2);
+  tempo(t3, t4);
+  tempo(t5, t6);
+  tempo(t7, t8);
+
+  array_list_destroy(l01);
+  array_list_destroy(l02);
+  array_list_destroy(l03);
+  linked_list_destroy(l04);
+}
+
+void lists_push_back_test(int n, int m, int p) {
+  
+  printf("lists_push_back_test:\n");
+
+  while (n < m) {
+    
+    array_list_int* l01 = array_list_create_8();
+    array_list_int* l02 = array_list_create_10();
+    array_list_int* l03 = array_list_create_10k();
+    linked_list_int* l04 = linked_list_create();
+    
+    
+    push_back_test(l01, l02, l03, l04, n); // feito
+    
+    
+    array_list_destroy(l01);
+    array_list_destroy(l02);
+    array_list_destroy(l03);
+    linked_list_destroy(l04);
+    
+    
+    n *= p;
+  }
+    
+}
+  
+void lists_get_start_test(int n, int m, int p) {
+    
+  printf("lists_get_start_test:\n");
+
+  while (n < m) {
+    
+    array_list_int* l01 = array_list_create_8();
+    array_list_int* l02 = array_list_create_10();
+    array_list_int* l03 = array_list_create_10k();
+    linked_list_int* l04 = linked_list_create();
+    
+    
+    array_list_populate(l01, n);
+    array_list_populate(l02, n);
+    array_list_populate(l03, n);
+    linked_list_populate(l04, n);
+    
+    
+    get_test(l01, l02, l03, l04, 0);
+    
+    
+    array_list_destroy(l01);
+    array_list_destroy(l02);
+    array_list_destroy(l03);
+    linked_list_destroy(l04);
+    
+    
+    n *= p;
+  }
+    
+}
+
+void lists_get_end_test(int n, int m, int p) {
+    
+  printf("lists_get_end_test:\n");
+
+  while (n < m) {
+    
+    array_list_int* l01 = array_list_create_8();
+    array_list_int* l02 = array_list_create_10();
+    array_list_int* l03 = array_list_create_10k();
+    linked_list_int* l04 = linked_list_create();
+    
+    
+    array_list_populate(l01, n);
+    array_list_populate(l02, n);
+    array_list_populate(l03, n);
+    linked_list_populate(l04, n);
+    
+    
+    get_test(l01, l02, l03, l04, n-1);
+    
+    
+    array_list_destroy(l01);
+    array_list_destroy(l02);
+    array_list_destroy(l03);
+    linked_list_destroy(l04);
+    
+    
+    n *= p;
+  }
+    
 }
