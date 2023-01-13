@@ -17,6 +17,8 @@ int main() {
   printf("l04: lista duplamente ligada.\n\n");
 
   printf("N: de %d a %d\n\n", n, m);
+
+  // para efetuar cada teste retire o comentário da função desejada
   
   while (n < m) {
     
