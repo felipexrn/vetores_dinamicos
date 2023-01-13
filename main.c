@@ -1,3 +1,5 @@
+// para efetuar cada teste retire o comentário da função desejada
+
 #include <stdio.h>
 #include <time.h>
 #include <stdlib.h>
@@ -5,8 +7,6 @@
 #include "linked_list_int.h"
 
 int main() {
-
-  //array_list_insertion_test(); // Método para leitura de arquivo de entrada
   
   int m = 17000000, n = 1, p = 2;
   srand(time(0));
@@ -18,7 +18,6 @@ int main() {
 
   printf("N: de %d a %d\n\n", n, m);
 
-  // para efetuar cada teste retire o comentário da função desejada
   
   while (n < m) {
     
@@ -76,6 +75,7 @@ void array_list_print_status(array_list_int* list) {
 void linked_list_print_status(linked_list_int* list) {
   printf("\nlinked_list_status:\n  size: %d\n  occupied: %.1f\n\n", linked_list_size(list), linked_list_percent_occupied(list));
 }
+
 void tempo(clock_t i, clock_t f) {
   //printf("Tempo: %.3lf ms\n", (f-i)/(CLOCKS_PER_SEC/1000.0));
   printf("%.3lf\t", (f-i)/(CLOCKS_PER_SEC/1000.0));
